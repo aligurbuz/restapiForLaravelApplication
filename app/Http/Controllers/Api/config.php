@@ -44,36 +44,49 @@ class config
 
     /*
     |--------------------------------------------------------------------------
-    | service response json
+    | service response method directive
     |--------------------------------------------------------------------------
     |
-    | Here is where you get response for your api
+    | Here is where you get response method for your api
     |
     */
 
     public function response ($data,$message=false) {
 
-        if($this->outputMethod=="json") {
+        $method=$this->outputMethod;
 
-            if(count($data))
-            {
-                //return config response
-                return response()->json([
+        return $this->$method($data,$message=false);
 
-                    'success'=>true,
-                    'data'=>$data
-                ]);
-            }
+    }
 
-            //return response fail
+
+    /*
+   |--------------------------------------------------------------------------
+   | service response json
+   |--------------------------------------------------------------------------
+   |
+   | Here is where you send json response for your api
+   |
+   */
+
+    public function json ($data,$message=false)
+    {
+        if(count($data))
+        {
+            //return config response
             return response()->json([
 
-                'success'=>false,
-                'message'=>$message
+                'success'=>true,
+                'data'=>$data
             ]);
-
-
         }
+
+        //return response fail
+        return response()->json([
+
+            'success'=>false,
+            'message'=>$message
+        ]);
 
     }
 
