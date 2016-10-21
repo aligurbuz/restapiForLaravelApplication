@@ -20,27 +20,15 @@ abstract class abstractClass
             //service general provision run
             foreach ($runProvisionForServices->run as $key=>$value )
             {
-                if($request->isMethod("get"))
+                //we identify according to request ismethod
+                $condition=($request->isMethod("get")) ? $value!=="postProvision" && $runProvisionForServices->$value()['success']==false : $runProvisionForServices->$value()['success']==false;
+
+                //condition
+                if($condition)
                 {
-                    //if there is success false
-                    if($value!=="postProvision" && $runProvisionForServices->$value()['success']==false)
-                    {
-                        //return config response false
-                        return app("\\App\\Http\\Controllers\\Api\\config")->response([],$runProvisionForServices->$value()['message']);
-                    }
+                    //return config response false
+                    return app("\\App\\Http\\Controllers\\Api\\config")->response([],$runProvisionForServices->$value()['message']);
                 }
-                else
-                {
-                    //if there is success false
-                    if($runProvisionForServices->$value()['success']==false)
-                    {
-                        //return config response false
-                        return app("\\App\\Http\\Controllers\\Api\\config")->response([],$runProvisionForServices->$value()['message']);
-                    }
-                }
-
-
-
 
             }
         }

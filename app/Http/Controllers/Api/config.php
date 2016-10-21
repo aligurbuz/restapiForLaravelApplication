@@ -55,7 +55,7 @@ class config
 
         $method=$this->outputMethod;
 
-        return $this->$method($data,$message=false);
+        return $this->$method($data,$message);
 
     }
 
