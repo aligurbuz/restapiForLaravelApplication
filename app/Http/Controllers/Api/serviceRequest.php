@@ -58,10 +58,10 @@ class serviceRequest
         //url service
         $getServiceData=[
 
-            'appname'=>$appname,
-            'servicename'=>$servicename,
-            'version'=>$this->config->version,
-            'urldata'=>\Input::all()
+            'appname'                   =>$appname,
+            'servicename'               =>$servicename,
+            'version'                   =>$this->config->version,
+            'urldata'                   =>\Input::all()
 
         ];
 
@@ -72,7 +72,7 @@ class serviceRequest
             return $this->serviceDirectoryControl($getServiceData,function () use ($getServiceData) {
 
                 //service return
-                return app("".$this->path."\\".$getServiceData['appname']."\\".$this->config->version."\\".$getServiceData['servicename']."\\index\\index")->get($getServiceData);
+                return app("".$this->path."\\".$getServiceData['appname']."\\".$this->config->version."\\".$getServiceData['servicename']."\\index\\index")->get($getServiceData,$this->request);
             });
         });
 

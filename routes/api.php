@@ -13,6 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+//api services (http/api/services request)
+Route::match(['get','post'],"{appname}/service/{serviceName}/{serviceExtension?}", "Api\\serviceRequest@index");

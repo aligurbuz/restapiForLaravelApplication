@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\app1\blog\index;
+namespace App\Http\Controllers\Api\app1\v1\blog\index;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\Api\config as config;
-use App\Http\Controllers\Api\app1\blog\index\model\index as model;
-use App\Http\Controllers\Api\app1\blog\index\source\index as source;
+use App\Http\Controllers\Api\app1\v1\blog\index\source\index as source;
 
-class index
+class index extends \App\Http\Controllers\Api\app1\v1\blog\index\abstractClass implements  \App\Http\Controllers\Api\interfaceService
 {
 
     private $request;
     private $config;
-    private $model;
     private $source;
+    private $list=array();
 
     /*
     |--------------------------------------------------------------------------
@@ -38,14 +37,12 @@ class index
     |
     */
 
-    public function __construct(Request $request,config $config,model $model,source $source) {
+    public function __construct(Request $request,config $config,source $source) {
 
         //request class
         $this->request = $request;
         //get config class
         $this->config=$config;
-        //get model
-        $this->model=$model;
         //get source
         $this->source=$source;
 
@@ -61,10 +58,14 @@ class index
     |
     */
 
-    public function get () {
+    public function main () {
+
+        //get source
+        $result=$this->source->get();
 
         //response return
-        return $this->config->response(['source'=>$this->source->get()]);
+        return $result;
+
     }
 
 }

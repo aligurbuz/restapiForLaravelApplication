@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\app1\v1\blog\index\model;
+namespace App\Http\Controllers\Api\app1\v1\blog\index;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +17,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\Api\config as config;
 
-class index
+class provision
 {
 
-    private $request;
-    private $config;
-    private $list=array();
+    public $request;
+    public $run=[];
 
     /*
     |--------------------------------------------------------------------------
@@ -35,29 +33,13 @@ class index
     |
     */
 
-    public function __construct(Request $request,config $config) {
+    public function __construct(Request $request) {
 
         //request class
         $this->request = $request;
-        //get config class
-        $this->config=$config;
 
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | service index
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you get blog service request for your api
-    |
-    */
-
-    public function get () {
-
-        //response return
-        return 'model';
-    }
 
 }

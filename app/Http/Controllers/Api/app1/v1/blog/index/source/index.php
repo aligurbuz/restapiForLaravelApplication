@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\app1\blog\index\source;
+namespace App\Http\Controllers\Api\app1\v1\blog\index\source;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +18,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\Api\config as config;
+use App\Http\Controllers\Api\app1\v1\blog\index\model\index as model;
 
 class index
 {
 
     private $request;
     private $config;
+    private $model;
+    private $list=array();
 
     /*
     |--------------------------------------------------------------------------
@@ -34,12 +37,14 @@ class index
     |
     */
 
-    public function __construct(Request $request,config $config) {
+    public function __construct(Request $request,config $config,model $model) {
 
         //request class
         $this->request = $request;
         //get config class
         $this->config=$config;
+        //get model
+        $this->model=$model;
 
     }
 
@@ -55,8 +60,11 @@ class index
 
     public function get () {
 
+        //get array list
+        $this->list['result']=$this->model->get();
+
         //response return
-        return ['source'];
+        return $this->list;
     }
 
 }
